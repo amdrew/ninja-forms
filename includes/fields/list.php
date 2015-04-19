@@ -694,6 +694,8 @@ function nf_field_list_edit_sub_value( $field_id, $user_value, $field ) {
 	$selected_value = $user_value;
 	$options = $field['data']['list']['options'];
 
+	$field_class = isset( $field['data']['class'] ) ? $field['data']['class'] : '';
+
 	if( isset( $field['data']['list_show_value'] ) ){
 		$list_show_value = $field['data']['list_show_value'];
 	}else{
