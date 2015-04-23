@@ -737,7 +737,7 @@ function nf_field_list_edit_sub_value( $field_id, $user_value, $field ) {
 
 					$label = str_replace( '&amp;', '&', $label );
 
-					$field_label = $data['label'];
+					$field_label = isset( $data['label'] ) ? $data['label'] : '';
 
 					if($list_show_value == 0){
 						$value = $label;
