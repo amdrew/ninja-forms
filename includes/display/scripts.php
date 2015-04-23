@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function ninja_forms_display_js( $form_id, $local_vars = '' ) {
 	global $post, $ninja_forms_display_localize_js, $wp_locale, $ninja_forms_loading, $ninja_forms_processing;
@@ -257,7 +257,7 @@ function ninja_forms_display_js( $form_id, $local_vars = '' ) {
 	$msg_format = 'inline';
 
 	wp_enqueue_script( 'ninja-forms-display',
-		NINJA_FORMS_URL . 'js/' . $src .'/ninja-forms-display' . $suffix . '.js',
+		NINJA_FORMS_URL . 'js/' . $src .'/ninja-forms-display' . $suffix . '.js?nf_ver=' . NF_PLUGIN_VERSION,
 		array( 'jquery', 'jquery-form', 'backbone', 'underscore' ) );
 
 	if( !isset( $ninja_forms_display_localize_js ) OR !$ninja_forms_display_localize_js ){
@@ -284,7 +284,7 @@ function ninja_forms_display_js( $form_id, $local_vars = '' ) {
 add_action( 'ninja_forms_display_js', 'ninja_forms_display_js', 10, 2 );
 
 function ninja_forms_display_css(){
-	wp_enqueue_style( 'ninja-forms-display', NINJA_FORMS_URL .'css/ninja-forms-display.css' );
+	wp_enqueue_style( 'ninja-forms-display', NINJA_FORMS_URL .'css/ninja-forms-display.css?nf_ver=' . NF_PLUGIN_VERSION );
 	wp_enqueue_style( 'jquery-qtip', NINJA_FORMS_URL .'css/qtip.css' );
 	wp_enqueue_style( 'jquery-rating', NINJA_FORMS_URL .'css/jquery.rating.css' );
 }

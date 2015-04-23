@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function nf_get_settings(){
   $instance = Ninja_Forms();

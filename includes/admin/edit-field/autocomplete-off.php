@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('init', 'nf_register_edit_autocomplete_off');
 function nf_register_edit_autocomplete_off(){
 	add_action('nf_edit_field_advanced', 'nf_field_autocomplete_off', 8, 2 );

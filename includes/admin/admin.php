@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function ninja_forms_add_menu(){
 	$page = add_menu_page("Ninja Forms" , __( 'Forms', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_parent_menu_capabilities', 'manage_options' ), "ninja-forms", "ninja_forms_admin", "dashicons-feedback", "35.1337" );
@@ -96,7 +96,7 @@ function ninja_forms_admin(){
 				}
 
 				if ( 'form_list' == $current_tab ) {
-					$builder_url = add_query_arg( array( 'form_id' => 'new', 'tab' => 'builder' ) );
+					$builder_url = esc_url( add_query_arg( array( 'form_id' => 'new', 'tab' => 'builder' ) ) );
 					?>
 					<h2><?php _e( 'Forms', 'ninja-forms' ); ?> <a href="<?php echo $builder_url; ?>" class="add-new-h2"><?php _e( 'Add New', 'ninja-forms'); ?></a></h2>
 					<?php

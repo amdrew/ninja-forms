@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Registration class. Responsible for handling registration of fields, notifications, and sidebars
  *

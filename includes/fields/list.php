@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_register_field_list(){
 	$args = array(
 		'name'          => __( 'List', 'ninja-forms' ),

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Upgrade Screen
  *
@@ -19,11 +19,11 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @return void
 */
 function nf_upgrades_screen() {
-	$action = isset( $_GET['nf-upgrade'] ) ? sanitize_text_field( $_GET['nf-upgrade'] ) : '';
-	$step   = isset( $_GET['step'] )        ? absint( $_GET['step'] )                     : 1;
-	$total  = isset( $_GET['total'] )       ? absint( $_GET['total'] )                    : false;
-	$custom = isset( $_GET['custom'] )      ? $_GET['custom']			                  : 0;
-	$form_id = isset( $_GET['form_id'] )      ? absint( $_GET['form_id'] )                : 0;
+	$action  = isset( $_GET['nf-upgrade'] )   ? sanitize_text_field( $_GET['nf-upgrade'] )  : '';
+	$step    = isset( $_GET['step'] )         ? absint( $_GET['step'] )                     : 1;
+	$total   = isset( $_GET['total'] )        ? absint( $_GET['total'] )                    : false;
+	$custom  = isset( $_GET['custom'] )       ? $_GET['custom']			                    : 0;
+	$form_id = isset( $_GET['form_id'] )      ? absint( $_GET['form_id'] )                  : 0;
 
 	if ( is_string( $custom ) ) {
 		$custom = urlencode( $custom );

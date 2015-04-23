@@ -50,7 +50,18 @@ jQuery(document).ready(function($) {
 		      		nfProcessing.step = response.step;
 		      		nfProcessing.totalSteps = response.total_steps;
 		      		nfProcessing.args = response.args;
-		      		
+                    nfProcessing.errors = response.errors;
+
+                    if ( nfProcessing.errors ) {
+
+                        $( "#nf-upgrade-errors").removeClass('hidden');
+
+                        $.each( nfProcessing.errors, function( index, error ) {
+                            $(".nf-upgrade-errors-list").append('<li>ERROR: ' + error + '</li>');
+                        });
+                    }
+
+
 		      		if ( nfProcessing.runSetup == 1 ) {
 		      			nfProcessing.setup();
 		      			nfProcessing.runSetup = 0;
@@ -62,7 +73,7 @@ jQuery(document).ready(function($) {
 		      		} else {
 		      			progressbar.progressbar( "value", 100 );
 		      			if ( typeof response.redirect != 'undefined' && response.redirect != '' ) {
-		      				//document.location.href = response.redirect;
+		      				document.location.href = response.redirect;
 		      			}
 		      		}
 		      	});

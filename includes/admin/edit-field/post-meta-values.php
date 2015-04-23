@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /*
 function ninja_forms_post_meta_value_box( $field_id ){
 	global $wpdb, $ninja_forms_fields;

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Submission.
  * This class handles storing, retrieving, editing a submission.

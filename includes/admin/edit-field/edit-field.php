@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_edit_field( $field_id, $new = false ){
 	global $wpdb, $ninja_forms_fields;
 
@@ -114,22 +114,31 @@ function ninja_forms_edit_field_el_output($field_id, $type, $label = '', $name =
 		<?php
 		break;
 		case 'rte':
-			$editor_id = str_replace( '[', '_', $name );
-			$editor_id = str_replace( ']', '', $editor_id );
-			
-			$plugin_settings = nf_get_settings();
-			if ( !isset( $plugin_settings['version_2_2_25_rte_fix'] ) OR $plugin_settings['version_2_2_25_rte_fix'] == '' ) {
-				$value = html_entity_decode( $value );
-				$plugin_settings['version_2_2_25_rte_fix'] = 1;
-				update_option( 'ninja_forms_settings', $plugin_settings );
+			// Check if our current user has the RTE disabled.
+			$user_id = get_current_user_id();
+			$rich_editing = get_user_meta( $user_id, 'rich_editing', true );
+			if ( 'true' == $rich_editing ) {
+				$editor_id = str_replace( '[', '_', $name );
+				$editor_id = str_replace( ']', '', $editor_id );
+				
+				$plugin_settings = nf_get_settings();
+				if ( !isset( $plugin_settings['version_2_2_25_rte_fix'] ) OR $plugin_settings['version_2_2_25_rte_fix'] == '' ) {
+					$value = html_entity_decode( $value );
+					$plugin_settings['version_2_2_25_rte_fix'] = 1;
+					update_option( 'ninja_forms_settings', $plugin_settings );
+				}
+
+				$args = apply_filters( 'ninja_forms_edit_field_rte', array( 'textarea_name' => $name ) );
+				wp_editor( $value, $editor_id, $args );				
+
+				// If we're using ajax, add this editor ID to our global var so that we can instantiate it on the front-end.
+				if ( isset ( $_POST['action'] ) && ( $_POST['action'] == 'ninja_forms_new_field' || $_POST['action'] == 'nf_output_field_settings_html' ) )
+					$nf_rte_editors[] = $editor_id;
+			} else {
+				?>
+				<textarea id="<?php echo $id;?>" name="<?php echo $name;?>" class="<?php echo $class;?>" rows="3" cols="20" ><?php echo $value;?></textarea>
+				<?php
 			}
-
-			$args = apply_filters( 'ninja_forms_edit_field_rte', array( 'textarea_name' => $name ) );
-			wp_editor( $value, $editor_id, $args );				
-
-			// If we're using ajax, add this editor ID to our global var so that we can instantiate it on the front-end.
-			if ( isset ( $_POST['action'] ) && ( $_POST['action'] == 'ninja_forms_new_field' || $_POST['action'] == 'nf_output_field_settings_html' ) )
-				$nf_rte_editors[] = $editor_id;
 
 		break;
 	}

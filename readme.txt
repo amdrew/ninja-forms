@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, wpnzach, daveshine, mordauk, bftr
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 2.9.6
+Stable tag: 2.9.11
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -74,35 +74,74 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.9.6 (6 March 2015) =
+= 2.9.11 (20 April 2015) =
 
-*Changes:*
+*Security:*
 
-* Simplified the form creation interface by adding a "Build Your Form" tab, an "Emails & Actions" tab, and a "Settings" tab. All other tabs have been removed.
-* Form Preview and Submissions are now buttons that can be clicked at any stage of editing a form.
-* Field settings have been simplified by introducing a series of new, expandable settings sections. These sections house more advanced or less-common settings.
-* Added HTML5 placeholders to text fields.
+* Fixed a security vulnerability that could allow users to inject scripts if they were logged in as administrators.
 
 *Bugs:*
 
-* Deleting Ninja Forms from the plugins page should now work in all instances.
-* Display of checkbox lists should now work properly.
-* Fixed a bug that could prompt users to run unnecessary updates on their site.
-* Preview pages should now always display properly.
-* Success messages should now always be shown after submission properly.
-* Fixed a bug that could cause a PHP notice to show in placeholders.
-* Fixed a bug that could cause forms not to display properly when added via the "append to page" option.
-* Fixed a major bug that could prevent longer forms from saving properly. Previous fixes required modifying a php.ini file.
-* Creating a new action should now show the proper saved message.
-* Updated the Ninja Forms translation file with several new strings and cleaned up existing strings.
-* Modified the way that options are grabbed from the database to make them more effecient and prevent errors.
-* Fixed a bug that caused post meta to be added to a post/page even if no form was selected.
+* The "Download All" button should now work properly for submissions.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.9.11 (20 April 2015) =
+
+*Security:*
+
+* Fixed a security vulnerability that could allow users to inject scripts if they were logged in as administrators.
+
+*Bugs:*
+
+* The "Download All" button should now work properly for submissions.
+
+= 2.9.10 (14 April 2015) =
+
+*Changes:*
+
+* Added support for populating a text or hidden field from a querystring.
+* Added a reset form conversions button to allow users to re-convert forms in the case of an error. 
+
+*Bugs:*
+
+* Fixed a bug that could cause forms to not submit properly.
+* Fixed a bug that could cause a PHP crash on earlier versions of PHP.
+* The user profile setting of "Disable rich text editor" should no longer cause problems when editing forms.
+* Credit Card errors should now show properly when submitting the form via AJAX.
+* The submission limit should now only count properly submitted forms.
+* Fixed a bug with email fields and the inline label position.
+
+= 2.9.9 (14 April 2015) =
+
+*Bugs:*
+
+* Fixed a bug that could cause a crash with older versions of PHP.
+
+= 2.9.8 (14 April 2015) =
+
+*Changes:*
+
+* Added support for populating a text or hidden field from a querystring.
+* Added a reset form conversions button to allow users to re-convert forms in the case of an error. 
+
+*Bugs:*
+
+* The user profile setting of "Disable rich text editor" should no longer cause problems when editing forms.
+* Credit Card errors should now show properly when submitting the form via AJAX.
+* The submission limit should now only count properly submitted forms.
+* Fixed a bug with email fields and the inline label position.
+
+= 2.9.7 (15 March 2015) =
+
+*Bugs:*
+
+* Fixed a browser caching bug.
+* Fixed a possible, very minor security concern.
 
 = 2.9.6 (6 March 2015) =
 

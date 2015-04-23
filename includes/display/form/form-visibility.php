@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 add_action( 'init', 'ninja_forms_register_display_form_visibility', 99 );
 function ninja_forms_register_display_form_visibility(){

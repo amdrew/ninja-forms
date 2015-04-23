@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 //add_action( 'ninja_forms_edit_field_before_ul', 'ninja_forms_edit_field_save_button' );
 function ninja_forms_edit_field_save_button( $form_id ){
 	?>

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function ninja_forms_sidebar_sorter($array, $sequence){
 	$tmp = array();

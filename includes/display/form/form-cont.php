@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function ninja_forms_display_open_cont($form_id){
 	//Check to see if the form_id has been sent.

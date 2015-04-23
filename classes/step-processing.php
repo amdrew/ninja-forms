@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Class for performing actions incrementally. Internally used for converting submissions, exporting submissions, etc.
  * Very useful when interacting with large amounts of data.
@@ -32,6 +32,11 @@ class NF_Step_Processing
 	 * @var redirect
 	 */
 	var $redirect = '';
+
+    /**
+     * @var array
+     */
+    var $errors = array();
 
 	/**
 	 * @var args
@@ -136,6 +141,8 @@ class NF_Step_Processing
 		if ( isset ( $this->redirect ) && ! empty ( $this->redirect ) ) {
 			$this->args['redirect'] = $this->redirect;
 		}
+
+        $return['errors'] = ( $this->errors ) ? $this->errors : FALSE;
 
 		$return['args'] = $this->args;
 

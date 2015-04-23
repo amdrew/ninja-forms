@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function ninja_forms_inside_label_hidden( $field_id, $data ){
 	if( isset( $data['label_pos'] ) AND $data['label_pos'] == 'inside' ){

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /*************************** LOAD THE BASE CLASS *******************************
  *******************************************************************************
@@ -112,16 +112,16 @@ class NF_Notifications_List_Table extends WP_List_Table {
      **************************************************************************/
     public function column_name( $item ){
         
-        $base_url = remove_query_arg( array( '_wp_http_referer', '_wpnonce' ) );
+        $base_url = esc_url_raw( remove_query_arg( array( '_wp_http_referer', '_wpnonce' ) ) );
 
         $activate_text = ( Ninja_Forms()->notification( $item['id'] )->active ) ? __( 'Deactivate', 'ninja-forms' ) : __( 'Activate', 'ninja-forms' );
         
         $activate_action = ( Ninja_Forms()->notification( $item['id'] )->active ) ? 'deactivate' : 'activate';
 
-        $activate_url = add_query_arg( array( 'notification-action' => $activate_action, 'id' => $item['id'] ), $base_url );
-        $edit_url = add_query_arg( array( 'notification-action' => 'edit', 'id' => $item['id'] ), $base_url );
-        $delete_url = add_query_arg( array( 'action' => 'delete' ), $base_url );
-        $duplicate_url = add_query_arg( array( 'notification-action' => 'duplicate', 'id' => $item['id'] ), $base_url );
+        $activate_url = esc_url( add_query_arg( array( 'notification-action' => $activate_action, 'id' => $item['id'] ), $base_url ) );
+        $edit_url = esc_url( add_query_arg( array( 'notification-action' => 'edit', 'id' => $item['id'] ), $base_url ) );
+        $delete_url = esc_url( add_query_arg( array( 'action' => 'delete' ), $base_url ) );
+        $duplicate_url = esc_url( add_query_arg( array( 'notification-action' => 'duplicate', 'id' => $item['id'] ), $base_url ) );
 
         //Build row actions
         $actions = array(

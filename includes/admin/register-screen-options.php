@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 $args = array(
 	'display_function' => 'ninja_forms_screen_option_tabs',
 	'save_function' => 'ninja_forms_save_screen_option_tabs',

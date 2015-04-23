@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /*
  *
  * This class handles all the update-related stuff for extensions, including adding a license section to the license tab.
@@ -128,7 +128,7 @@ class NF_Extension_Updater
 		);
  
 		// Call the custom API.
-		$response = wp_remote_get( add_query_arg( $api_params, $this->store_url ) );
+		$response = wp_remote_get( esc_url_raw( add_query_arg( $api_params, $this->store_url ) ) );
 
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) )
@@ -183,7 +183,7 @@ class NF_Extension_Updater
 		);
 
 		// Call the custom API.
-		$response = wp_remote_get( add_query_arg( $api_params, $this->store_url ), array( 'timeout' => 15, 'sslverify' => false ) );
+		$response = wp_remote_get( esc_url_raw( add_query_arg( $api_params, $this->store_url ), array( 'timeout' => 15, 'sslverify' => false ) ) );
 
  		// make sure the response came back okay
 		if ( is_wp_error( $response ) )

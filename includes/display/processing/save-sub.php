@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function nf_save_sub(){
 	global $ninja_forms_processing, $ninja_forms_fields;

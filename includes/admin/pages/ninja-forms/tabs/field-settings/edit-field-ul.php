@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 add_action( 'ninja_forms_edit_field_ul', 'ninja_forms_edit_field_output_ul' );
 function ninja_forms_edit_field_output_ul( $form_id ){
 	$fields = ninja_forms_get_fields_by_form_id( $form_id );

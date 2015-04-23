@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 class NF_Convert_Notifications extends NF_Step_Processing {
 

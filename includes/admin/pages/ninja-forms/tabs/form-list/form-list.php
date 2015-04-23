@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 
 function ninja_forms_register_form_export(){
@@ -15,7 +15,7 @@ function ninja_forms_register_form_duplicate(){
 		$form_id = absint( $_REQUEST['form_id'] );
 		$form_row = ninja_forms_serialize_form( $form_id );
 		ninja_forms_import_form( $form_row );
-		$url = remove_query_arg( array( 'duplicate_form', 'form_id' ) );
+		$url = esc_url_raw( remove_query_arg( array( 'duplicate_form', 'form_id' ) ) );
 		wp_redirect( $url );
 	}
 }
@@ -23,7 +23,7 @@ function ninja_forms_register_form_duplicate(){
 add_action( 'admin_init', 'ninja_forms_register_form_duplicate' );
 
 function ninja_forms_register_tab_form_list(){
-	$new_link = esc_url(add_query_arg(array('form_id' => 'new', 'tab' => 'form_settings')));
+	$new_link = esc_url( add_query_arg( array('form_id' => 'new', 'tab' => 'form_settings') ) );
 	$args = array(
 		'name' => __( 'All Forms', 'ninja-forms' ),
 		'page' => 'ninja-forms',
@@ -120,18 +120,18 @@ function ninja_forms_tab_form_list(){
 			}
 				if($page_count > 1){
 
-					$first_page = remove_query_arg('paged');
-					$last_page = add_query_arg(array('paged' => $page_count));
+					$first_page = esc_url( remove_query_arg( 'paged' ) );
+					$last_page = esc_url( add_query_arg( array( 'paged' => $page_count ) ) );
 
 					if($current_page > 1){
 						$prev_page = $current_page - 1;
-						$prev_page = add_query_arg(array('paged' => $prev_page));
+						$prev_page = esc_url( add_query_arg( array('paged' => $prev_page ) ) );
 					}else{
 						$prev_page = $first_page;
 					}
 					if($current_page != $page_count){
 						$next_page = $current_page + 1;
-						$next_page = add_query_arg(array('paged' => $next_page));
+						$next_page = esc_url( add_query_arg( array('paged' => $next_page ) ) );
 					}else{
 						$next_page = $last_page;
 					}
@@ -168,7 +168,7 @@ function ninja_forms_tab_form_list(){
 			$date_updated = $data['date_updated'];
 			$date_updated = strtotime( $date_updated );
 			$date_updated = date_i18n( 'F d, Y', $date_updated );
-			$link = remove_query_arg( array( 'paged' ) );
+			$link = esc_url( remove_query_arg( array( 'paged' ) ) );
 			$edit_link = esc_url( add_query_arg( array( 'tab' => 'builder', 'form_id' => $form_id ), $link ) );
 			$subs_link = admin_url( 'edit.php?post_status=all&post_type=nf_sub&action=-1&m=0&form_id=' . $form_id . '&paged=1&mode=list&action2=-1' );
 			$duplicate_link = esc_url( add_query_arg( array( 'duplicate_form' => 1, 'form_id' => $form_id ), $link ) );

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('init', 'ninja_forms_register_fields_process');
 function ninja_forms_register_fields_process(){
 	add_action('ninja_forms_process', 'ninja_forms_fields_process');

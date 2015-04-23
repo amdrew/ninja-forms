@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Function that checks the current sub count and updates the loading class if neccesary.
@@ -18,7 +18,8 @@ function nf_check_sub_limit( $form_id ) {
         return false;
 
     $args = array(
-        'form_id' => $form_id
+        'form_id' => $form_id,
+        'action'  => 'submit',
     );
     $sub_count = ninja_forms_get_sub_count( $args );
 

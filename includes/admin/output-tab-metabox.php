@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 	$plugin_settings = nf_get_settings();
 	if($form_id != ''){

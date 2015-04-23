@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('init', 'ninja_forms_register_filter_msgs');
 function ninja_forms_register_filter_msgs(){
 	add_action( 'ninja_forms_post_process', 'ninja_forms_filter_msgs' );

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Outputs the HTML of the form title.
  * The form title can be filtered with 'ninja_forms_form_title'.

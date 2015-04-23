@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 // For backwards compatibilty, make sure that this function doesn't already exist.
 if ( !function_exists ( 'ninja_forms_register_field_post_tags' ) ) {

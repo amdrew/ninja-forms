@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * This Ninja Forms Loading Class is used to interact with Ninja Forms as it loads form data.
  * It is based upon the WordPress Error API.
@@ -134,6 +134,9 @@ class Ninja_Forms_Loading {
 			} else {
 				$default_value = '';
 			}
+
+			$default_value_type = isset ( $data['default_value_type'] ) ? $data['default_value_type'] : '';
+
 			// Check to see if our default value is one of our preset values:
 			get_currentuserinfo();
 			$user_ID 			= $current_user->ID;
@@ -194,6 +197,11 @@ class Ninja_Forms_Loading {
 						$date_format = 'm/d/Y';
 					}
 					$default_value = date( $date_format, strtotime( 'now' ) );
+					break;
+				default:
+					if ( 'querystring' == $default_value_type ) {
+						$default_value = isset ( $_GET[ $default_value ] ) ? $_GET[ $default_value ] : '';
+					}
 					break;
 			}
 

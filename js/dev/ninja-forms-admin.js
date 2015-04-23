@@ -277,19 +277,41 @@ jQuery(document).ready(function($) {
 	// Default Value
 	$(document).on( 'change', '.ninja-forms-_text-default-value', function(){
 		var id = this.id.replace('default_value_', '');
-		if(this.value == '_custom'){
+		if( this.value == '_custom' || this.value == 'querystring' ){
 			$("#ninja_forms_field_" + id + "_default_value").val('');
 			$("#default_value_label_" + id).show();
 			$("#ninja_forms_field_" + id + "_default_value").focus();
 		}else{
-			$("#default_value_label_" + id).hide();
-			$("#ninja_forms_field_" + id + "_default_value").val(this.value);
+			$( '.querystring-error' ).hide();
+			$( '#ninja_forms_field_' + id + '_default_value' ).removeClass( 'error' );
+			$( '#default_value_label_' + id ).hide();
+			$( '#ninja_forms_field_' + id + '_default_value' ).val(this.value);
+		}
+
+		if ( 'querystring' != this.value ) {
+			$( '.querystring-error' ).hide();
+			$( '#ninja_forms_field_' + id + '_default_value' ).removeClass( 'error' );
+			$( '.nf-save-admin-fields' ).attr( 'disabled', false );
 		}
 
 		if(this.value != '' && this.value != 'today' ){
 			$("#ninja_forms_field_" + id + "_datepicker").prop('checked', false);
 		}
 	});
+
+	// Throw an error if we set a querystring that is reserved
+	$( document ).on( 'keyup', '.nf-default-value-text', function() {
+		var field_id = $( this ).data( 'field-id' );
+		if ( -1 != wp_reserved_terms.indexOf( this.value ) && 'querystring' == $( '#default_value_' + field_id ).val() ) {
+			$( '.querystring-error' ).show();
+			$( this ).addClass( 'error' );
+			$( '.nf-save-admin-fields' ).attr( 'disabled', true );
+		} else {
+			$( '.querystring-error' ).hide();
+			$( this ).removeClass( 'error' );
+			$( '.nf-save-admin-fields' ).attr( 'disabled', false );
+		}
+	} );
 
 	// Input Mask
 	$(document).on( 'change', '.ninja-forms-_text-mask', function(){
@@ -800,13 +822,27 @@ jQuery(document).ready(function($) {
 		}
 	} );
 
-	$( document ).on( 'change', '#delete_on_uninstall', function( e ) {
+	$( '.nf-delete-on-uninstall-prompt' ).nfAdminModal( { title: nf_nuke_title, buttons: '.nf-delete-on-uninstall-prompt-buttons' } );
+
+	$( document ).on( 'click', '#delete_on_uninstall', function( e ) {
 		if ( this.checked ) {
-			var answer = confirm( ninja_forms_settings.nuke_warning );
-			if ( ! answer ) {
-				this.checked = false;
-			}
+			this.checked = false;
+			$( '.nf-delete-on-uninstall-prompt' ).nfAdminModal( 'open' );
 		}
+	} );
+
+	$( document ).on( 'click', '.nf-delete-on-uninstall-yes', function( e ) {
+		e.preventDefault();
+		$( "#delete_on_uninstall" ).attr( 'checked', true );
+		$( '.nf-delete-on-uninstall-prompt' ).nfAdminModal( 'close' );
+	} );
+
+	// JS for resetting form conversion
+	$( '#nf-conversion-reset' ).nfAdminModal( { title: nf_conversion_title, buttons: '#nf-conversion-reset-buttons' } );
+
+	$( document ).on( 'click', '.nf-reset-form-conversion', function( e ) {
+		e.preventDefault();
+		$( '#nf-conversion-reset' ).nfAdminModal( 'open' );
 	} );
 
 }); //Document.ready();

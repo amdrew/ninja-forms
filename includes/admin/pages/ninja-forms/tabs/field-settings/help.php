@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 add_action( 'init', 'ninja_forms_register_field_settings_help', 9 );
 function ninja_forms_register_field_settings_help(){
 	$args = array(
@@ -21,7 +21,7 @@ function ninja_forms_help_field_settings(){
 		</ul>
 	</p>
 	<p>
-		<?php _e('So, if you wanted to create a mask for an American Social Security Number, you wouldd type 999-99-9999 into the box', 'ninja-forms');?>. <?php _e('The 9s would represent any number, and the -s would be automatically added', 'ninja-forms');?>. <?php _e('This would prevent the user from putting in anything other than numbers', 'ninja-forms');?>.
+		<?php _e('So, if you wanted to create a mask for an American Social Security Number, you would type 999-99-9999 into the box', 'ninja-forms');?>. <?php _e('The 9s would represent any number, and the -s would be automatically added', 'ninja-forms');?>. <?php _e('This would prevent the user from putting in anything other than numbers', 'ninja-forms');?>.
 	</p>
 	<p>
 		<?php _e('You can also combine these for specific applications', 'ninja-forms');?>. <?php _e('For instance, if you had a product key that was in the form of A4B51.989.B.43C, you could mask it with: a9a99.999.a.99a, which would force all the a\'s to be letters and the 9s to be numbers', 'ninja-forms');?>.

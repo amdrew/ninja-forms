@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function ninja_forms_req_fields_process(){
 	global $ninja_forms_processing, $ninja_forms_fields;

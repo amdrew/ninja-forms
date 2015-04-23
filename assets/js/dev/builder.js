@@ -35,8 +35,11 @@ var nfField = Backbone.Model.extend( {
 			this.updateData();
 			// Remove any tinyMCE editors
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).find( 'div.rte' ).each( function() {
-				var editor_id = jQuery( this ).find( 'textarea.wp-editor-area' ).prop( 'id' );
-				tinymce.remove( '#' + editor_id );
+				if ( 'undefined' != typeof tinymce ) {
+					var editor_id = jQuery( this ).find( 'textarea.wp-editor-area' ).prop( 'id' );
+					tinymce.remove( '#' + editor_id );					
+				}
+
 			} );
 
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).slideUp('fast', function( e ) {
@@ -62,7 +65,7 @@ var nfField = Backbone.Model.extend( {
 			// Remove our no-padding class.
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).removeClass( 'no-padding' );	
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).append( response );
-			if ( typeof nf_ajax_rte_editors !== 'undefined' ) {
+			if ( typeof nf_ajax_rte_editors !== 'undefined' && 'undefined' !== typeof tinyMCE ) {
 				for (var x = nf_ajax_rte_editors.length - 1; x >= 0; x--) {
 					var editor_id = nf_ajax_rte_editors[x];
 					tinyMCE.init( tinyMCEPreInit.mceInit[ editor_id ] );
@@ -82,7 +85,10 @@ var nfField = Backbone.Model.extend( {
 	},
 	updateData: function() {
 		var field_id = this.id;
-		tinyMCE.triggerSave();
+		if ( 'undefined' != typeof tinyMCE ) {
+			tinyMCE.triggerSave();
+		}
+		
 		var data = jQuery('[name^=ninja_forms_field_' + field_id + ']');
 		var field_data = jQuery(data).serializeFullArray();
 
@@ -176,7 +182,7 @@ var nfFields = Backbone.Collection.extend({
 		if ( response.new_type == 'List' ) {
 			this.listOptionsSortable();
 		}
-		if ( typeof nf_ajax_rte_editors !== 'undefined' ) {
+		if ( typeof nf_ajax_rte_editors !== 'undefined' && 'undefined' !== typeof tinyMCE ) {
 			for (var x = nf_ajax_rte_editors.length - 1; x >= 0; x--) {
 				var editor_id = nf_ajax_rte_editors[x];
 				tinyMCE.init( tinyMCEPreInit.mceInit[ editor_id ] );

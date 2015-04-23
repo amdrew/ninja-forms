@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /*
  *
  * Function used to store the attachment IDs being uploaded into a $_SESSION variable.

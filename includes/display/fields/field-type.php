@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Outputs a hidden HTML form element with the type of field this is.
 **/

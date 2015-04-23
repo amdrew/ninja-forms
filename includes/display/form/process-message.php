@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Outputs the HTML for the ajax processing div. Only used when submitting via ajax.
  *

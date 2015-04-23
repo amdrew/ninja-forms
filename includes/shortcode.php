@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function ninja_forms_shortcode( $atts ){
 	if ( is_admin() && ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) ) {
@@ -151,6 +151,9 @@ function nf_parse_fields_shortcode( $content ) {
 	global $ninja_forms_processing;
 
 	if ( ! isset ( $ninja_forms_processing ) )
+		return $content;
+
+	if ( is_array ( $content ) )
 		return $content;
 
 	$matches = array();

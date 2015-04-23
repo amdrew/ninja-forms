@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /*
  * Used to restore the progress of a user.
  * If the global processing variable $ninja_forms_processing is set, filter the default_value for each field.

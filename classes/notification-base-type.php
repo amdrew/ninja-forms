@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Class for notification types.
  * This is the parent class. it should be extended by specific notification types
@@ -81,9 +81,12 @@ abstract class NF_Notification_Base_Type
 				}
 			}
 
-			$setting[ $x ] = str_replace( '[ninja_forms_all_fields]', '[ninja_forms_all_fields html=' . $html . ']', $setting[ $x ] );
-			$setting[ $x ] = do_shortcode( $setting[ $x ] );
-			$setting[ $x ] = nf_parse_fields_shortcode( $setting[ $x ] );
+			if ( ! is_array ( $setting[ $x] ) ) {
+				$setting[ $x ] = str_replace( '[ninja_forms_all_fields]', '[ninja_forms_all_fields html=' . $html . ']', $setting[ $x ] );
+				$setting[ $x ] = do_shortcode( $setting[ $x ] );
+				$setting[ $x ] = nf_parse_fields_shortcode( $setting[ $x ] );				
+			}
+
 		}
 
 		return apply_filters( 'nf_notification_process_setting', $setting, $setting_name, $id );

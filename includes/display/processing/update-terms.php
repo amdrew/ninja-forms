@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /*
  *
  * Function to hook into the post creation/update that will change the term based upon the selected term(s)

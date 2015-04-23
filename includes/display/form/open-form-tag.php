@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function ninja_forms_register_display_open_form_tag() {
 	add_action( 'ninja_forms_display_open_form_tag', 'ninja_forms_display_open_form_tag' );
@@ -17,9 +17,14 @@ function ninja_forms_display_open_form_tag( $form_id ) {
 			$url = admin_url( 'admin-ajax.php', 'http' );
 		}
 		$url = apply_filters( 'ninja_forms_ajax_url', $url, $form_id );
-		$url = add_query_arg( 'action', 'ninja_forms_ajax_submit', $url );
+		$url = esc_url_raw( add_query_arg( 'action', 'ninja_forms_ajax_submit', $url ) );
 	} else {
-		$url = '';
+        if ( is_ssl() ) {
+            $url = 'https:/' . htmlspecialchars( $_SERVER["REQUEST_URI"] );
+        } else {
+            $url = 'http:/' . htmlspecialchars( $_SERVER["REQUEST_URI"] );
+        }
+        $url = '';
 	}
 
 	$display = 1;

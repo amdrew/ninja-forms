@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_register_field_hiddenbox(){
 	$args = array(
 		'name' => __( 'Hidden Field' , 'ninja-forms' ),
@@ -37,10 +37,13 @@ add_action('init', 'ninja_forms_register_field_hiddenbox');
 
 function ninja_forms_field_hidden_edit($field_id, $data){
 	$custom = '';
-	// Default Value
-	if(isset($data['default_value'])){
-		$default_value = $data['default_value'];
-	}else{
+	$currency_symbol = isset( $plugin_settings['currency_symbol'] ) ? $plugin_settings['currency_symbol'] : "$";
+	$date_format = isset( $plugin_settings['date_format'] ) ? $plugin_settings['date_format'] : "m/d/Y";
+	$default_value = isset( $data['default_value'] ) ? $data['default_value'] : '';
+	$default_value_type = isset( $data['default_value_type'] ) ? $data['default_value_type'] : '';
+	$custom = '';
+
+	if( $default_value == 'none' ){
 		$default_value = '';
 	}
 
@@ -48,7 +51,7 @@ function ninja_forms_field_hidden_edit($field_id, $data){
 	<p class="description description-thin">
 		<label for="">
 			<?php _e( 'Default Value' , 'ninja-forms'); ?><br />
-			<select id="default_value_<?php echo $field_id;?>" name="" class="widefat ninja-forms-_text-default-value" rel="<?php echo $field_id;?>">
+			<select id="default_value_<?php echo $field_id;?>" name="ninja_forms_field_<?php echo $field_id;?>[default_value_type]" class="widefat ninja-forms-_text-default-value">
 				<option value="" <?php if( $default_value == ''){ echo 'selected'; $custom = 'no';}?>><?php _e('None', 'ninja-forms'); ?></option>
 				<option value="_user_id" <?php if($default_value == '_user_id'){ echo 'selected'; $custom = 'no';}?>><?php _e('User ID (If logged in)', 'ninja-forms'); ?></option>
 				<option value="_user_firstname" <?php if($default_value == '_user_firstname'){ echo 'selected'; $custom = 'no';}?>><?php _e('User Firstname (If logged in)', 'ninja-forms'); ?></option>
@@ -58,14 +61,17 @@ function ninja_forms_field_hidden_edit($field_id, $data){
 				<option value="post_id" <?php if($default_value == 'post_id'){ echo 'selected'; $custom = 'no';}?>><?php _e('Post / Page ID (If available)', 'ninja-forms'); ?></option>
 				<option value="post_title" <?php if($default_value == 'post_title'){ echo 'selected'; $custom = 'no';}?>><?php _e('Post / Page Title (If available)', 'ninja-forms'); ?></option>
 				<option value="post_url" <?php if($default_value == 'post_url'){ echo 'selected'; $custom = 'no';}?>><?php _e('Post / Page URL (If available)', 'ninja-forms'); ?></option>
+				<option value="today" <?php if($default_value == 'today'){ echo 'selected'; $custom = 'no';}?>><?php _e('Today\'s Date', 'ninja-forms'); ?></option>
 				<option value="_custom" <?php if($custom != 'no'){ echo 'selected';}?>><?php _e('Custom', 'ninja-forms'); ?> -></option>
+				<option value="querystring" <?php if($default_value_type == 'querystring'){ echo 'selected'; $custom = 'yes';}?>><?php _e('Querystring Variable', 'ninja-forms'); ?> -></option>
 			</select>
 		</label>
 	</p>
 	<p class="description description-thin">
 		<label for="" id="default_value_label_<?php echo $field_id;?>" style="<?php if($custom == 'no'){ echo 'display:none;';}?>">
-			<?php _e( 'Custom Default Value' , 'ninja-forms'); ?><br />
-			<input type="text" class="widefat code" name="ninja_forms_field_<?php echo $field_id;?>[default_value]" id="ninja_forms_field_<?php echo $field_id;?>_default_value" value="<?php echo $default_value;?>" />
+			<br />
+			<input type="text" class="widefat code nf-default-value-text" name="ninja_forms_field_<?php echo $field_id;?>[default_value]" id="ninja_forms_field_<?php echo $field_id;?>_default_value" value="<?php echo $default_value;?>" data-field-id="<?php echo $field_id; ?>" />
+			<span class="querystring-error" style="display:none;"><?php _e( 'This keyword is reserved by WordPress. Please try another.', 'ninja-forms' ); ?></span>
 		</label>
 	</p>
 

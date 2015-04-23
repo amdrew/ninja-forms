@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.9.6
+Version: 2.9.11
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -284,7 +284,7 @@ class Ninja_Forms {
 
 		// Plugin version
 		if ( ! defined( 'NF_PLUGIN_VERSION' ) )
-			define( 'NF_PLUGIN_VERSION', '2.9.6' );
+			define( 'NF_PLUGIN_VERSION', '2.9.11' );
 
 		// Plugin Folder Path
 		if ( ! defined( 'NF_PLUGIN_DIR' ) )
@@ -390,6 +390,7 @@ class Ninja_Forms {
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-subs.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
+            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms-reset.php' );
 		}
 
 		// Include our upgrade files.

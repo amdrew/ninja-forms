@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_setup_processing_class( $form_id = '' ){
 	global $ninja_forms_processing;
 	//Set the form id

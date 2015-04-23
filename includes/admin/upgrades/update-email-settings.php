@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 
 class NF_Update_Email_Settings extends NF_Step_Processing {

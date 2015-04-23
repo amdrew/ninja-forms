@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function ninja_forms_load_screen_options_tab() {
 	global $ninja_forms_help_screen_tabs, $ninja_forms_screen_options;

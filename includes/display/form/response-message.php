@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /*
  * Outputs the HTML for displaying success messages or error messages set to display at location 'general'
  *

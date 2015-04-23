@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_register_field_textbox(){
 	$args = array(
 		'name' => __( 'Textbox', 'ninja-forms' ),
@@ -105,24 +105,12 @@ function nf_field_text_edit_default_value( $field_id, $data ){
 
 	$plugin_settings = nf_get_settings();
 
-	if( isset( $plugin_settings['currency_symbol'] ) ){
-		$currency_symbol = $plugin_settings['currency_symbol'];
-	}else{
-		$currency_symbol = "$";
-	}
-
-	if( isset( $plugin_settings['date_format'] ) ){
-		$date_format = $plugin_settings['date_format'];
-	}else{
-		$date_format = "m/d/Y";
-	}
+	$currency_symbol = isset( $plugin_settings['currency_symbol'] ) ? $plugin_settings['currency_symbol'] : "$";
+	$date_format = isset( $plugin_settings['date_format'] ) ? $plugin_settings['date_format'] : "m/d/Y";
+	$default_value = isset( $data['default_value'] ) ? $data['default_value'] : '';
+	$default_value_type = isset( $data['default_value_type'] ) ? $data['default_value_type'] : '';
 	$custom = '';
-	// Default Value
-	if( isset( $data['default_value'] ) ){
-		$default_value = $data['default_value'];
-	}else{
-		$default_value = '';
-	}
+
 	if( $default_value == 'none' ){
 		$default_value = '';
 	}
@@ -133,7 +121,7 @@ function nf_field_text_edit_default_value( $field_id, $data ){
 		<label for="">
 			<?php _e( 'Default Value' , 'ninja-forms'); ?>
 		</label><br />
-			<select id="default_value_<?php echo $field_id;?>" name="" class="widefat ninja-forms-_text-default-value">
+			<select id="default_value_<?php echo $field_id;?>" name="ninja_forms_field_<?php echo $field_id;?>[default_value_type]" class="widefat ninja-forms-_text-default-value">
 				<option value="" <?php if( $default_value == ''){ echo 'selected'; $custom = 'no';}?>><?php _e('None', 'ninja-forms'); ?></option>
 				<option value="_user_id" <?php if($default_value == '_user_id'){ echo 'selected'; $custom = 'no';}?>><?php _e('User ID (If logged in)', 'ninja-forms'); ?></option>
 				<option value="_user_firstname" <?php if($default_value == '_user_firstname'){ echo 'selected'; $custom = 'no';}?>><?php _e('User Firstname (If logged in)', 'ninja-forms'); ?></option>
@@ -145,17 +133,18 @@ function nf_field_text_edit_default_value( $field_id, $data ){
 				<option value="post_url" <?php if($default_value == 'post_url'){ echo 'selected'; $custom = 'no';}?>><?php _e('Post / Page URL (If available)', 'ninja-forms'); ?></option>
 				<option value="today" <?php if($default_value == 'today'){ echo 'selected'; $custom = 'no';}?>><?php _e('Today\'s Date', 'ninja-forms'); ?></option>
 				<option value="_custom" <?php if($custom != 'no'){ echo 'selected';}?>><?php _e('Custom', 'ninja-forms'); ?> -></option>
+				<option value="querystring" <?php if($default_value_type == 'querystring'){ echo 'selected'; $custom = 'yes';}?>><?php _e('Querystring Variable', 'ninja-forms'); ?> -></option>
 			</select>
 		</span>
 	</div>
 	<div class="description description-thin">
 
 		<label for="" id="default_value_label_<?php echo $field_id;?>" style="<?php if($custom == 'no'){ echo 'display:none;';}?>">
-			<span class="field-option">
-			<?php _e( 'Default Value' , 'ninja-forms'); ?><br />
-			<input type="text" class="widefat code" name="ninja_forms_field_<?php echo $field_id;?>[default_value]" id="ninja_forms_field_<?php echo $field_id;?>_default_value" value="<?php echo $default_value;?>" />
-			</span>
+			<br />
+			<input type="text" class="widefat code nf-default-value-text" name="ninja_forms_field_<?php echo $field_id;?>[default_value]" id="ninja_forms_field_<?php echo $field_id;?>_default_value" value="<?php echo $default_value;?>" data-field-id="<?php echo $field_id; ?>" />
+			<span class="querystring-error" style="display:none;"><?php _e( 'This keyword is reserved by WordPress. Please try another.', 'ninja-forms' ); ?></span>
 		</label>
+
 
 	</div>
 	<?php
@@ -308,8 +297,14 @@ function ninja_forms_field_text_pre_process( $field_id, $user_value ){
 	$data = $field_row['data'];
 	if( isset( $data['email'] ) AND $data['email'] == 1 AND $user_value != '' ){
 		if ( ! is_email( $user_value ) ) {
-    		$ninja_forms_processing->add_error( 'email-'.$field_id, $invalid_email, $field_id );
-    		$ninja_forms_processing->add_error( 'email-general', $invalid_email );
+
+            //Check False Positive
+            if ( 'inside' == $data['label_pos'] AND ( $data['label'] . " *" ) == $ninja_forms_processing->get_field_value( $field_id ) ) {
+                //False Positive
+            } else {
+                $ninja_forms_processing->add_error('email-' . $field_id, $invalid_email, $field_id);
+                $ninja_forms_processing->add_error('email-general', $invalid_email);
+            }
 		}
 	}
 

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /*
  *
@@ -63,11 +63,6 @@ function ninja_forms_activation( $network_wide ){
 		$forms = '';
 
 		$opt = $plugin_settings;
-
-		if( ! empty( $current_version ) && version_compare( $current_version, '2.0' , '<' ) ){
-			nf_pre_20_activation( $current_version );
-			$opt = nf_pre_20_opts();
-		}
 
 		$sql = "CREATE TABLE IF NOT EXISTS ".NINJA_FORMS_FAV_FIELDS_TABLE_NAME." (
 		`id` int(11) NOT NULL AUTO_INCREMENT,

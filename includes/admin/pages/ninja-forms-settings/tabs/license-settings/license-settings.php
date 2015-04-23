@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_register_tab_license_settings(){
 	$args = array(
 		'name' 				=> __( 'Licenses', 'ninja-forms' ),

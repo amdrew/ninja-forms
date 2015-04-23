@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /*
  *
  * Function to hook into our field filter and add the selected terms if the field is set to populate_term.

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Outputs the HTML of the field label if it is set to display.
  * Also outputs the required symbol if it is set.

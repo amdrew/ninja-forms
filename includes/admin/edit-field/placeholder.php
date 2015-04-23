@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('init', 'ninja_forms_register_edit_field_placeholder');
 function ninja_forms_register_edit_field_placeholder(){
 	add_action('ninja_forms_edit_field_before_registered', 'ninja_forms_edit_field_placeholder', 10);

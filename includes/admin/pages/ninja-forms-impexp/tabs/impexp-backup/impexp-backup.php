@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 //add_action('init', 'ninja_forms_register_tab_impexp_backup');
 
 function ninja_forms_register_tab_impexp_backup(){

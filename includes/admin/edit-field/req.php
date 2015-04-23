@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('init', 'ninja_forms_register_edit_field_required');
 function ninja_forms_register_edit_field_required(){
 	add_action('nf_edit_field_restrictions', 'ninja_forms_field_required', 9, 2 );

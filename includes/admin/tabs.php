@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_display_tabs(){
 	global $ninja_forms_tabs;
 	$current_tab = ninja_forms_get_current_tab();

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_post_process(){
 	global $wpdb, $ninja_forms_processing;
 

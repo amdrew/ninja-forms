@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 class NF_Download_All_Subs extends NF_Step_Processing {
 
@@ -28,7 +28,7 @@ class NF_Download_All_Subs extends NF_Step_Processing {
 
 		$this->args['filename'] = $this->random_filename( 'all-subs' );
 		update_user_option( get_current_user_id(), 'nf_download_all_subs_filename', $this->args['filename'] );
-		$this->redirect = add_query_arg( array( 'download_all' => $this->args['filename'] ), $this->args['redirect'] );
+		$this->redirect = esc_url_raw( add_query_arg( array( 'download_all' => $this->args['filename'] ), $this->args['redirect'] ) );
 
 		return $args;
 	}

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Class for our email notification type.
  *
@@ -346,6 +346,9 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		}
 
 		if ( is_array( $to ) AND !empty( $to ) ){
+
+            $to = explode( ",", $this->flatten_email_array( $to ) );
+
 			wp_mail( $to, $subject, $message, $headers, $attachments );
 		}
 
@@ -354,6 +357,28 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			//unlink ( $csv_attachment );
 		}
 	}
+
+    public function flatten_email_array( array $emails = array() ) {
+
+        $return = array();
+
+        foreach ( $emails as $email ) {
+
+            if ( is_array( $email ) ) {
+
+                $return[] = $this->flatten_email_array( $email );
+
+            } else {
+
+                $return[] = $email;
+
+            }
+
+        }
+
+        return implode( ',', $return );
+
+    }
 
 	/**
 	 * Explode our settings by ` and extract each value.

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_register_field_checkbox(){
 	$args = array(
 		'name' => __( 'Checkbox', 'ninja-forms' ),

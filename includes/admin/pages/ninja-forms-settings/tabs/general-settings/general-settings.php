@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 add_action( 'init', 'ninja_forms_register_tab_general_settings', 9 );
 
 function ninja_forms_register_tab_general_settings(){
@@ -61,12 +61,36 @@ function ninja_forms_register_general_settings_metabox(){
 				'type'	=> 'checkbox',
 				'label'	=> __( 'Remove ALL Ninja Forms data upon uninstall?', 'ninja-forms' ),
 				'desc'	=> sprintf( __( 'If this box is checked, ALL Ninja Forms data will be removed from the database upon deletion. %sAll form and submission data will be unrecoverable.%s', 'ninja-forms' ), '<span class="nf-nuke-warning">', '</span>' ),
-			)
+			),
+			array(
+				'name'	=> 'delete_prompt',
+				'type'	=> '',
+				'display_function' => 'nf_delete_on_uninstall_prompt',
+			),
 		),
 		'state' => 'closed',
 	);
+    $args['settings'] = apply_filters( 'nf_general_settings_advanced', $args['settings'] );
+
 	ninja_forms_register_tab_metabox( $args );
 
+}
+
+function nf_delete_on_uninstall_prompt() {
+	?>
+	<div class="nf-delete-on-uninstall-prompt">
+		<?php _e( 'This setting will COMPLETELY remove anything Ninja Forms related upon plugin deletion. This includes SUBMISSIONS and FORMS. It cannot be undone.', 'ninja-forms' ); ?>
+	</div>
+	<div class="nf-delete-on-uninstall-prompt-buttons">
+		<div id="nf-admin-modal-cancel">
+            <a class="submitdelete deletion modal-close nf-delete-on-uninstall-cancel" href="#"><?php _e( 'Cancel', 'ninja-forms' ); ?></a>
+        </div>
+        <div id="nf-admin-modal-update">
+            <a class="button-primary nf-delete-on-uninstall-yes" href="#"><?php _e( 'Continue', 'ninja-forms' ); ?></a>
+        </div>
+	</div>
+
+	<?php
 }
 
 function ninja_forms_save_general_settings( $data ){

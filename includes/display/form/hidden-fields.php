@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('init', 'ninja_forms_register_display_hidden_fields');
 function ninja_forms_register_display_hidden_fields(){
 	add_action('ninja_forms_display_after_open_form_tag', 'ninja_forms_display_hidden_fields');

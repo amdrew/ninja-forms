@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Main Notifications Class
  *
@@ -172,7 +172,7 @@ class NF_Notifications
 			'tokens'			=> array(),
 			'all_fields'		=> $fields,
 			'process_fields'	=> $process_fields,
-			'filter_type'		=> remove_query_arg( array( 'type' ) ),
+			'filter_type'		=> esc_url_raw( remove_query_arg( array( 'type' ) ) ),
 		) );
 
 		wp_localize_script( 'nf-notifications', 'nf_notifications', $js_vars );
@@ -216,7 +216,7 @@ class NF_Notifications
 			<?php
 		if ( '' == $action ) {
 			?>
-			<h2><?php _e( 'Email & Actions', 'ninja-forms' ); ?> <a href="<?php echo add_query_arg( array( 'notification-action' => 'new' ) ); ?>" class="add-new-h2"><?php _e( 'Add New', 'ninja-forms' );?></a></h2>
+			<h2><?php _e( 'Email & Actions', 'ninja-forms' ); ?> <a href="<?php echo esc_url( add_query_arg( array( 'notification-action' => 'new' ) ) ); ?>" class="add-new-h2"><?php _e( 'Add New', 'ninja-forms' );?></a></h2>
 
 	        <!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
 	      	 <form id="forms-filter" method="get">
@@ -246,7 +246,7 @@ class NF_Notifications
 			}
 
 			?>
-			<h2><?php echo $title; ?> <a href="<?php echo remove_query_arg( array( 'notification-action', 'id', 'update_message' ) );?>" class="button-secondary"><?php _e( 'Back To List', 'ninja-forms' );?></a></h2>
+			<h2><?php echo $title; ?> <a href="<?php echo esc_url( remove_query_arg( array( 'notification-action', 'id', 'update_message' ) ) );?>" class="button-secondary"><?php _e( 'Back To List', 'ninja-forms' );?></a></h2>
 
 			<input type="hidden" id="notification_id" name="notification_id" value="<?php echo $id; ?>" />
 			<table class="form-table">
@@ -329,8 +329,8 @@ class NF_Notifications
 		do_action( 'nf_save_notification', $n_id, $data, $new );
 
 		if ( $new ) {
-			$redirect = remove_query_arg( array( 'notification-action' ) );
-			$redirect = add_query_arg( array( 'id' => $n_id, 'notification-action' => 'edit', 'update_message' => urlencode( __( 'Action Updated', 'ninja-forms' ) ) ), $redirect );
+			$redirect = esc_url_raw( remove_query_arg( array( 'notification-action' ) ) );
+			$redirect = esc_url_raw( add_query_arg( array( 'id' => $n_id, 'notification-action' => 'edit', 'update_message' => urlencode( __( 'Action Updated', 'ninja-forms' ) ) ), $redirect ) );
 			wp_redirect( $redirect );
 			die();
 		}
@@ -420,7 +420,7 @@ class NF_Notifications
 
 		Ninja_Forms()->notification( $n_id )->duplicate();
 
-		wp_redirect( remove_query_arg( array( 'notification-action' ) ) );
+		wp_redirect( esc_url_raw( remove_query_arg( array( 'notification-action' ) ) ) );
 		die();
 	}
 
@@ -479,7 +479,7 @@ class NF_Notifications
         	}
         }
 
-        wp_redirect( remove_query_arg( array( 'notification', '_wpnonce', '_wp_http_referer', 'action', 'action2' ) ) );
+        wp_redirect( esc_url_raw( remove_query_arg( array( 'notification', '_wpnonce', '_wp_http_referer', 'action', 'action2' ) ) ) );
         die();
 	}
 
@@ -502,7 +502,7 @@ class NF_Notifications
 		$html = '<select class="nf-fields-combobox" data-first-option="' . $first_option . '">';
 		$html .= '<option value="">' . $first_option .'</option>';
 		foreach( $all_fields as $field_id => $field ) {
-			$label = $field['label'];
+			$label = esc_html( $field['label'] );
 			if ( strlen( $label ) > 30 )
 				$label = substr( $label, 0, 30 ) . '...';
 

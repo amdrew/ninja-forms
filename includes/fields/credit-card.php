@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /*
  * Function to register a new field for user's country
  *
@@ -222,7 +222,7 @@ function ninja_forms_field_credit_card_display( $field_id, $data, $form_id = '' 
 			?>
 		</div>
 		<div>
-			<div class="ninja-forms-credit-card-number-error ninja-forms-field-error">
+			<div id="ninja_forms_field_credit_card_number_error" class="ninja-forms-credit-card-number-error ninja-forms-field-error">
 				<?php
 				if ( $card_number_errors ) {
 					if( is_array( $card_number_errors ) ) {

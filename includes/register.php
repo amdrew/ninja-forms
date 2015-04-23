@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_register_field($slug, $args = array()){
 	global $ninja_forms_fields;
 

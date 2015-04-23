@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Outputs the HTML for each field within a given form_id.
  * It is attached to the ninja_forms_display_fields hook which is excuted by ninja_forms_display_form() in display-form.php

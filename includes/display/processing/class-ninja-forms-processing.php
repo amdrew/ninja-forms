@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * This Ninja Forms Processing Class is used to interact with Ninja Forms as it processes form data.
  * It is based upon the WordPress Error API.

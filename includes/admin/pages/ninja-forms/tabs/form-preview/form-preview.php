@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function ninja_forms_register_tab_form_preview(){
 	if(isset($_REQUEST['form_id'])){

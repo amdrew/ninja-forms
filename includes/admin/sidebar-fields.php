@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_sidebar_display_fields($slug){
 	global $ninja_forms_fields, $current_tab;
 	if(is_array($ninja_forms_fields) AND isset($_REQUEST['form_id'])){

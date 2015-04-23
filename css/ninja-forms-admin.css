@@ -2,12 +2,11 @@
 /  Generic styles & classes
 ----------------------------------*/
 .nf-box {
-	background: #f1f1f1;
+	background: #fff;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	padding: 10px;
 }
-
 
 
 /* ---------------------------------
@@ -648,7 +647,6 @@ a.tooltip span
 	float: left;
 	margin: 0 20px 20px 0;
 	width: 300px;
-	height: 350px;
 	position: relative;
 }
 .nf-extend img {
@@ -657,16 +655,16 @@ a.tooltip span
 	height: auto;
 }
 
+.nf-extend-content p {
+	min-height: 60px;
+}
+
 .nf-extend .nf-button {
-	position: absolute;
-	bottom: 10px;
-	right: 10px;
+	float: right;
 }
 
 .nf-extend .nf-doc-button {
-	position: absolute;
-	bottom: 10px;
-	left: 10px;
+	float: left;
 }
 
 .mp6 .nf-extend {
@@ -1328,4 +1326,10 @@ p.debug-report {
 .about-overview iframe {
 	display: block;
 	margin: 0 auto;
+}
+.querystring-error {
+	color: red;
+}
+input[type=text].error {
+	border: solid red;
 }

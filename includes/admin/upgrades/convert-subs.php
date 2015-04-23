@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Submission conversion
  * This class handles converting pre-2.7 submissions to the new CPT storage.

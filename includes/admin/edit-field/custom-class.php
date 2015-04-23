@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('init', 'ninja_forms_register_edit_field_custom_class');
 function ninja_forms_register_edit_field_custom_class(){
 	add_action('ninja_forms_edit_field_after_registered', 'ninja_forms_edit_field_custom_class', 10, 2 );

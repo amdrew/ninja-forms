@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 // uncomment this line for testing
 //set_site_transient( 'update_plugins', null );

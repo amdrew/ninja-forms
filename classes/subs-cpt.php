@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Submission CPT.
  * This class adds our submission CPT and handles displaying submissions in the wp-admin.
@@ -386,8 +386,8 @@ class NF_Subs_CPT {
 				if ( !isset ( $_GET['post_status'] ) || $_GET['post_status'] == 'all' ) {
 					echo '<div class="row-actions">';
 					do_action( 'nf_sub_table_before_row_actions', $sub_id, $column );
-					echo '<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( add_query_arg( array() ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">' . __( 'Edit', 'ninja-forms' ) . '</a> | </span> 
-						<span class="edit"><a href="' . add_query_arg( array( 'export_single' => $sub_id ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>';
+					echo '<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( esc_url(  add_query_arg( array() ) ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">' . __( 'Edit', 'ninja-forms' ) . '</a> | </span> 
+						<span class="edit"><a href="' . esc_url( add_query_arg( array( 'export_single' => $sub_id ) ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>';
 					$row_actions = apply_filters( 'nf_sub_table_row_actions', array(), $sub_id, $form_id );
 					if ( ! empty( $row_actions ) ) {
 						echo implode(" | ", $row_actions);
@@ -703,6 +703,7 @@ class NF_Subs_CPT {
 					if ( isset ( $_REQUEST['form_id'] ) && $_REQUEST['form_id'] != '' ) {
 						$redirect = urlencode( remove_query_arg( array( 'download_all', 'download_file' ) ) );
 						$url = admin_url( 'admin.php?page=nf-processing&action=download_all_subs&form_id=' . $_REQUEST['form_id'] . '&redirect=' . $redirect );
+						$url = esc_url( $url );
 						?>
 						var button = '<a href="<?php echo $url; ?>" class="button-secondary nf-download-all"><?php echo __( 'Download All Submissions', 'ninja-forms' ); ?></a>';
 						jQuery( '#doaction2' ).after( button );
@@ -710,7 +711,7 @@ class NF_Subs_CPT {
 					}
 					
 					if ( isset ( $_REQUEST['download_all'] ) && $_REQUEST['download_all'] != '' ) {
-						$redirect = add_query_arg( array( 'download_file' => $_REQUEST['download_all'] ) );
+						$redirect = esc_url_raw( add_query_arg( array( 'download_file' => $_REQUEST['download_all'] ) ) );
 						$redirect = remove_query_arg( array( 'download_all' ), $redirect );
 						?>
 						document.location.href = "<?php echo $redirect; ?>";
@@ -745,9 +746,9 @@ class NF_Subs_CPT {
 				$active = 'trash';
 			}
 
-			$all_url = add_query_arg( array( 'post_status' => 'all' ) );
+			$all_url = esc_url_raw( add_query_arg( array( 'post_status' => 'all' ) ) );
 			$all_url = remove_query_arg( 's', $all_url );
-			$trash_url = add_query_arg( array( 'post_status' => 'trash' ) );
+			$trash_url = esc_url_raw( add_query_arg( array( 'post_status' => 'trash' ) ) );
 			$trash_url = remove_query_arg( 's', $trash_url );
 			if ( isset ( $_GET['form_id'] ) ) {
 				$trashed_sub_count = nf_get_sub_count( $_GET['form_id'], 'trash' );	
@@ -1179,7 +1180,7 @@ class NF_Subs_CPT {
 			if ( file_exists( $file_path ) ) {
 				$myfile = file_get_contents ( $file_path );
 			} else {
-				$redirect = remove_query_arg( array( 'download_file', 'download_all' ) );
+				$redirect = esc_url_raw( remove_query_arg( array( 'download_file', 'download_all' ) ) );
 				wp_redirect( $redirect );
 				die();
 			}

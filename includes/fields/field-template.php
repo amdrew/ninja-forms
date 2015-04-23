@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * This is a template file that you can use when creating new field types for Ninja Forms.
  * The simplest way to use this file is to copy its contents and paste them into a new file.

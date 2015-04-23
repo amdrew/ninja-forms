@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('init', 'ninja_forms_register_edit_field_label');
 function ninja_forms_register_edit_field_label(){
 	add_action('ninja_forms_edit_field_before_registered', 'ninja_forms_edit_field_label', 10, 2);

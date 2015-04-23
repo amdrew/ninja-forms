@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_edit_field_remove_button( $field_id ){
 	global $ninja_forms_fields;
 

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_register_field_desc(){
 	$args = array(
 		'name' => __( 'Text', 'ninja-forms' ),
@@ -98,6 +98,6 @@ function ninja_forms_field_desc_display( $field_id, $data, $form_id = '' ){
 function ninja_forms_field_desc_pre_process( $field_id, $user_value ){
 	global $ninja_forms_processing;
 	$field = ninja_forms_get_field_by_id( $field_id );
-	$default_value = $field['data']['default_value'];
+	$default_value = isset( $field['data']['default_value'] ) ? $field['data']['default_value'] : '';
 	$ninja_forms_processing->update_field_value( $field_id, $default_value );
 }

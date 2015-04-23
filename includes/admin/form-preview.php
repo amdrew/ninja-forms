@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 add_action( 'init', 'ninja_forms_preview_form' );
 function ninja_forms_preview_form() {
