@@ -307,8 +307,6 @@ function ninja_forms_field_list_display( $field_id, $data, $form_id = '' ){
 
 					$label = str_replace( '&amp;', '&', $label );
 
-					$field_label = $data['label'];
-
 					if($list_show_value == 0){
 						$value = $label;
 					}
@@ -316,7 +314,7 @@ function ninja_forms_field_list_display( $field_id, $data, $form_id = '' ){
 
 					if ( $selected_value == $value OR ( is_array( $selected_value ) AND in_array( $value, $selected_value ) ) ) {
 						$selected = 'selected';
-					}else if( ( $selected_value == '' OR $selected_value == $field_label ) AND isset( $option['selected'] ) AND $option['selected'] == 1 ){
+					}else if( $selected_value == '' AND isset( $option['selected'] ) AND $option['selected'] == 1 ){
 						$selected = 'selected';
 					}else{
 						$selected = '';
@@ -745,15 +743,13 @@ function nf_field_list_edit_sub_value( $field_id, $user_value, $field ) {
 
 					$label = str_replace( '&amp;', '&', $label );
 
-					$field_label = $data['label'];
-
 					if($list_show_value == 0){
 						$value = $label;
 					}
 
 					if ( $selected_value == $value OR ( is_array( $selected_value ) AND in_array( $value, $selected_value ) ) ) {
 						$selected = 'selected';
-					}else if( ( $selected_value == '' OR $selected_value == $field_label ) AND isset( $option['selected'] ) AND $option['selected'] == 1 ){
+					}else if( $selected_value == '' AND isset( $option['selected'] ) AND $option['selected'] == 1 ){
 						$selected = 'selected';
 					}else{
 						$selected = '';
